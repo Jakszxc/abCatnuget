@@ -64,7 +64,8 @@ TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 TextLabel.TextSize = 40.000
 
 local UserInputService = game:GetService("UserInputService")
-local keyToCopy = "YourSecretKey123" -- Chuỗi cần sao chép
+local keyToCopy = "BreadAtlantis" -- Chuỗi cần sao chép
+local validKeys = {"BreadAtlantis"} -- Danh sách key hợp lệ
 
 TextButton_2.MouseButton1Click:Connect(function()
     if setclipboard then
@@ -72,5 +73,16 @@ TextButton_2.MouseButton1Click:Connect(function()
     elseif UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) or UserInputService:IsKeyDown(Enum.KeyCode.RightControl) then
         -- Nếu setclipboard không hoạt động, có thể hiển thị thông báo hướng dẫn
         print("Copy manually: " .. keyToCopy)
+    end
+end)
+
+TextButton.MouseButton1Click:Connect(function()
+    local inputKey = TextBox.Text
+    for _, key in ipairs(validKeys) do
+        if inputKey == key then
+            print("Key is valid! Loading...")
+            -- Thực hiện hành động khi key hợp lệ
+            break
+        end
     end
 end)
