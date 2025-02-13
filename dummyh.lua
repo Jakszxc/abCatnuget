@@ -5,7 +5,7 @@ local CheckButton = Instance.new("TextButton")
 local GetKeyButton = Instance.new("TextButton")
 local TextLabel = Instance.new("TextLabel")
 
-local validKeys = {"1weekGKufkgijrgit"} -- Danh sách key hợp lệ
+local validKeys = {"1weekGKufkgijrgit", "jrugh48tuoa", "BreadAtlantis"} -- Danh sách key hợp lệ
 local keyToCopy = "https://discord.gg/6sjNhy68" -- Key để sao chép
 
 -- Thiết lập GUI
