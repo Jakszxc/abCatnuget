@@ -1,86 +1,76 @@
-local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
-local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+-- Gui to Lua
+-- Version: 3.2
 
-local Window = Fluent:CreateWindow({
-    Title = "Dummy" ,
-    SubTitle = "by Slorus (hoang)",
-    TabWidth = 160,
-    Size = UDim2.fromOffset(580, 460),
-    Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
-    Theme = "Dark",
-    MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
-})
+-- Instances:
 
--- Fluent provides Lucide Icons https://lucide.dev/icons/ for the tabs, icons are optional
-local Tabs = {
-    Main = Window:AddTab({ Title = "Kaitun", Icon = "" }),
-}
+local Frame = Instance.new("Frame")
+local TextButton = Instance.new("TextButton")
+local TextButton_2 = Instance.new("TextButton")
+local TextBox = Instance.new("TextBox")
+local TextLabel = Instance.new("TextLabel")
 
-local Toggle = Tabs.Main:AddToggle("MyToggle", { Title = "Start Kaitun", Default = false })
+--Properties:
 
--- Cài đặt nhiệm vụ
-local questName = "BanditQuest1" -- Tên nhiệm vụ
-local questLevel = 1 -- Cấp độ nhiệm vụ
+Frame.Parent = game.StarterGui.ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderSizePixel = 0
+Frame.Position = UDim2.new(0.185040593, 0, 0.192976356, 0)
+Frame.Size = UDim2.new(0, 856, 0, 320)
 
--- Biến để kiểm soát vòng lặp
-local autoQuestEnabled = false
+TextButton.Parent = Frame
+TextButton.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+TextButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextButton.BorderSizePixel = 0
+TextButton.Position = UDim2.new(0.0257009342, 0, 0.721875012, 0)
+TextButton.Size = UDim2.new(0, 255, 0, 65)
+TextButton.Font = Enum.Font.SourceSansBold
+TextButton.Text = "Check Key"
+TextButton.TextColor3 = Color3.fromRGB(0, 255, 17)
+TextButton.TextSize = 26.000
 
--- Hàm auto quest
-local function startQuest()
-    local args = {
-        [1] = "StartQuest",
-        [2] = questName,
-        [3] = questLevel
-    }
-    local remote = game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("CommF_")
-    local success, err = pcall(function()
-        remote:InvokeServer(unpack(args))
-    end)
-    
-    if not success then
-        warn("Không thể bắt đầu nhiệm vụ: " .. tostring(err))
-    else
-        print("Đã bắt đầu nhiệm vụ: " .. questName)
-    end
-end
+TextButton_2.Parent = Frame
+TextButton_2.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+TextButton_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextButton_2.BorderSizePixel = 0
+TextButton_2.Position = UDim2.new(0.605140209, 0, 0.721875012, 0)
+TextButton_2.Size = UDim2.new(0, 255, 0, 65)
+TextButton_2.Font = Enum.Font.SourceSansBold
+TextButton_2.Text = "Get Key"
+TextButton_2.TextColor3 = Color3.fromRGB(0, 255, 17)
+TextButton_2.TextSize = 26.000
 
--- Hàm auto-equip
-local function autoEquip()
-    local character = game:GetService("Players").LocalPlayer.Character
-    if character and character:FindFirstChild("Combat") and character.Combat:FindFirstChild("EquipEvent") then
-        local args = {
-            [1] = true
-        }
-        local success, err = pcall(function()
-            character.Combat.EquipEvent:FireServer(unpack(args))
-        end)
-        
-        if not success then
-            warn("Không thể auto equip: " .. tostring(err))
-        else
-            print("Auto-equip thành công")
-        end
-    else
-        warn("Không tìm thấy sự kiện EquipEvent trong nhân vật")
-    end
-end
+TextBox.Parent = Frame
+TextBox.BackgroundColor3 = Color3.fromRGB(218, 218, 218)
+TextBox.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextBox.BorderSizePixel = 0
+TextBox.Position = UDim2.new(0.0841121525, 0, 0.253125012, 0)
+TextBox.Size = UDim2.new(0, 661, 0, 96)
+TextBox.Font = Enum.Font.SourceSansBold
+TextBox.Text = "Input Key"
+TextBox.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextBox.TextSize = 50.000
 
--- Kích hoạt toggle
-Toggle:OnChanged(function()
-    autoQuestEnabled = Toggle.Value
-    print("Auto quest:", autoQuestEnabled)
+TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.BorderSizePixel = 0
+TextLabel.Position = UDim2.new(0.205607474, 0, 0, 0)
+TextLabel.Size = UDim2.new(0, 454, 0, 68)
+TextLabel.Font = Enum.Font.SourceSansBold
+TextLabel.Text = "Hoax Key System"
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextSize = 40.000
 
-    if autoQuestEnabled then
-        -- Auto equip trước khi bắt đầu
-        autoEquip()
+local UserInputService = game:GetService("UserInputService")
+local keyToCopy = "YourSecretKey123" -- Chuỗi cần sao chép
 
-        -- Bắt đầu vòng lặp auto quest
-        spawn(function()
-            while autoQuestEnabled do
-                startQuest()
-                wait(10) -- Chỉnh thời gian giữa mỗi lần thực hiện nhiệm vụ
-            end
-        end)
+TextButton_2.MouseButton1Click:Connect(function()
+    if setclipboard then
+        setclipboard(keyToCopy)
+    elseif UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) or UserInputService:IsKeyDown(Enum.KeyCode.RightControl) then
+        -- Nếu setclipboard không hoạt động, có thể hiển thị thông báo hướng dẫn
+        print("Copy manually: " .. keyToCopy)
     end
 end)
