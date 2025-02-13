@@ -74,7 +74,7 @@ GetKeyButton.MouseButton1Click:Connect(function()
     if setclipboard then
         setclipboard(keyToCopy)
         print("Key copied to clipboard!")
-        TextLabel.Text = "Key Copied!"
+        TextLabel.Text = "Please buy key in discord"
         TextLabel.TextColor3 = Color3.fromRGB(0, 255, 255)
     else
         print("Copy manually: " .. keyToCopy)
