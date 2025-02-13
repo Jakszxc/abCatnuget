@@ -58,7 +58,7 @@ CheckButton.MouseButton1Click:Connect(function()
             TextLabel.TextColor3 = Color3.fromRGB(0, 255, 0)
             
             -- Đợi 1 giây rồi ẩn GUI
-            wait(1)
+            wait(0.1)
             ScreenGui:Destroy() -- Xóa GUI
             
             return
