@@ -6,7 +6,7 @@ local GetKeyButton = Instance.new("TextButton")
 local TextLabel = Instance.new("TextLabel")
 
 local validKeys = {"BreadAtlantis"} -- Danh sách key hợp lệ
-local keyToCopy = "BreadAtlantis" -- Key để sao chép
+local keyToCopy = "https://discord.gg/6sjNhy68" -- Key để sao chép
 
 -- Thiết lập GUI
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
