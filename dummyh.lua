@@ -1,88 +1,82 @@
--- Gui to Lua
--- Version: 3.2
-
--- Instances:
-
+local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
-local TextButton = Instance.new("TextButton")
-local TextButton_2 = Instance.new("TextButton")
 local TextBox = Instance.new("TextBox")
+local CheckButton = Instance.new("TextButton")
+local GetKeyButton = Instance.new("TextButton")
 local TextLabel = Instance.new("TextLabel")
 
---Properties:
+local validKeys = {"BreadAtlantis"} -- Danh sách key hợp lệ
+local keyToCopy = "BreadAtlantis" -- Key để sao chép
 
-Frame.Parent = game.StarterGui.ScreenGui
+-- Thiết lập GUI
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+Frame.Parent = ScreenGui
 Frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Frame.BorderSizePixel = 0
-Frame.Position = UDim2.new(0.185040593, 0, 0.192976356, 0)
-Frame.Size = UDim2.new(0, 856, 0, 320)
-
-TextButton.Parent = Frame
-TextButton.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
-TextButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton.BorderSizePixel = 0
-TextButton.Position = UDim2.new(0.0257009342, 0, 0.721875012, 0)
-TextButton.Size = UDim2.new(0, 255, 0, 65)
-TextButton.Font = Enum.Font.SourceSansBold
-TextButton.Text = "Check Key"
-TextButton.TextColor3 = Color3.fromRGB(0, 255, 17)
-TextButton.TextSize = 26.000
-
-TextButton_2.Parent = Frame
-TextButton_2.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
-TextButton_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_2.BorderSizePixel = 0
-TextButton_2.Position = UDim2.new(0.605140209, 0, 0.721875012, 0)
-TextButton_2.Size = UDim2.new(0, 255, 0, 65)
-TextButton_2.Font = Enum.Font.SourceSansBold
-TextButton_2.Text = "Get Key"
-TextButton_2.TextColor3 = Color3.fromRGB(0, 255, 17)
-TextButton_2.TextSize = 26.000
-
-TextBox.Parent = Frame
-TextBox.BackgroundColor3 = Color3.fromRGB(218, 218, 218)
-TextBox.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextBox.BorderSizePixel = 0
-TextBox.Position = UDim2.new(0.0841121525, 0, 0.253125012, 0)
-TextBox.Size = UDim2.new(0, 661, 0, 96)
-TextBox.Font = Enum.Font.SourceSansBold
-TextBox.Text = "Input Key"
-TextBox.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextBox.TextSize = 50.000
+Frame.Size = UDim2.new(0, 400, 0, 200)
+Frame.Position = UDim2.new(0.5, -200, 0.5, -100)
 
 TextLabel.Parent = Frame
-TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel.BackgroundTransparency = 1.000
-TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel.BorderSizePixel = 0
-TextLabel.Position = UDim2.new(0.205607474, 0, 0, 0)
-TextLabel.Size = UDim2.new(0, 454, 0, 68)
-TextLabel.Font = Enum.Font.SourceSansBold
 TextLabel.Text = "Hoax Key System"
+TextLabel.Size = UDim2.new(1, 0, 0.2, 0)
 TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel.TextSize = 40.000
+TextLabel.BackgroundTransparency = 1
+TextLabel.Font = Enum.Font.SourceSansBold
+TextLabel.TextSize = 20
 
-local UserInputService = game:GetService("UserInputService")
-local keyToCopy = "BreadAtlantis" -- Chuỗi cần sao chép
-local validKeys = {"BreadAtlantis"} -- Danh sách key hợp lệ
+TextBox.Parent = Frame
+TextBox.Size = UDim2.new(0.8, 0, 0.3, 0)
+TextBox.Position = UDim2.new(0.1, 0, 0.3, 0)
+TextBox.Text = "Enter Key"
+TextBox.Font = Enum.Font.SourceSansBold
+TextBox.TextSize = 18
 
-TextButton_2.MouseButton1Click:Connect(function()
-    if setclipboard then
-        setclipboard(keyToCopy)
-    elseif UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) or UserInputService:IsKeyDown(Enum.KeyCode.RightControl) then
-        -- Nếu setclipboard không hoạt động, có thể hiển thị thông báo hướng dẫn
-        print("Copy manually: " .. keyToCopy)
-    end
-end)
+CheckButton.Parent = Frame
+CheckButton.Size = UDim2.new(0.4, 0, 0.2, 0)
+CheckButton.Position = UDim2.new(0.1, 0, 0.7, 0)
+CheckButton.Text = "Check Key"
+CheckButton.Font = Enum.Font.SourceSansBold
+CheckButton.TextSize = 18
+CheckButton.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+CheckButton.TextColor3 = Color3.fromRGB(0, 255, 17)
 
-TextButton.MouseButton1Click:Connect(function()
+GetKeyButton.Parent = Frame
+GetKeyButton.Size = UDim2.new(0.4, 0, 0.2, 0)
+GetKeyButton.Position = UDim2.new(0.5, 0, 0.7, 0)
+GetKeyButton.Text = "Get Key"
+GetKeyButton.Font = Enum.Font.SourceSansBold
+GetKeyButton.TextSize = 18
+GetKeyButton.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+GetKeyButton.TextColor3 = Color3.fromRGB(0, 255, 17)
+
+-- Chức năng kiểm tra key
+CheckButton.MouseButton1Click:Connect(function()
     local inputKey = TextBox.Text
     for _, key in ipairs(validKeys) do
         if inputKey == key then
             print("Key is valid! Loading...")
-            -- Thực hiện hành động khi key hợp lệ
-            break
+            TextLabel.Text = "Key Valid! Access Granted"
+            TextLabel.TextColor3 = Color3.fromRGB(0, 255, 0)
+            
+            -- Đợi 1 giây rồi ẩn GUI
+            wait(1)
+            ScreenGui:Destroy() -- Xóa GUI
+            
+            return
         end
+    end
+    print("Invalid Key!")
+    TextLabel.Text = "Invalid Key! Try Again"
+    TextLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
+end)
+
+-- Chức năng sao chép key
+GetKeyButton.MouseButton1Click:Connect(function()
+    if setclipboard then
+        setclipboard(keyToCopy)
+        print("Key copied to clipboard!")
+        TextLabel.Text = "Key Copied!"
+        TextLabel.TextColor3 = Color3.fromRGB(0, 255, 255)
+    else
+        print("Copy manually: " .. keyToCopy)
     end
 end)
